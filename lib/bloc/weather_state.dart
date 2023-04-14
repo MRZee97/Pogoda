@@ -10,11 +10,15 @@ abstract class WeatherState extends Equatable {
 class WeatherStateInitial extends WeatherState {
 }
 
+// состояние загрузки
 class WeatherStateLoading extends WeatherState {}
+
+// загруженное
 class WeatherStateLoaded extends WeatherState {
   WeatherStateLoaded({required this.temps, required this.windSpeeds, required this.humidities});
   List temps;
   List windSpeeds;
   List humidities;
 }
+// состояние ошибки
 class WeatherStateError extends WeatherState {}

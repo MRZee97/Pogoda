@@ -18,6 +18,7 @@ class _CityWeatherPageState extends State<CityWeatherPage> {
     return BlocProvider(
       create: (context) => WeatherBloc(
         serverInteraction: ServerInteraction()
+        //после инициализации блока отправляем событие
       )..add(WeatherSearchButtonPressed(city: widget.city)),
       child: BlocBuilder<WeatherBloc, WeatherState>(
         builder: (context, state){

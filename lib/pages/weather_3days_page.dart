@@ -7,9 +7,6 @@ import '../data/server_interaction.dart';
 class Weather3DaysPage extends StatefulWidget {
   Weather3DaysPage({Key? key, required this.state}) : super(key: key);
   WeatherStateLoaded state;
-  // List temps;
-  // List humadities;
-  // List windSpeeds;
 
   @override
   State<Weather3DaysPage> createState() => _Weather3DaysPageState();
@@ -24,25 +21,21 @@ class _Weather3DaysPageState extends State<Weather3DaysPage> {
   @override
   void initState() {
     super.initState();
-
+  //из состояния достаем данных о погоде
     final day1 = WeatherDay(temp: widget.state.temps[0], humadity:widget.state.humidities[0],  windSpeed:widget.state.windSpeeds[0], );
     final day2 =  WeatherDay(temp: widget.state.temps[1], humadity:widget.state.humidities[1],  windSpeed:widget.state.windSpeeds[1], );
     final day3 = WeatherDay(temp: widget.state.temps[2], humadity:widget.state.humidities[2],  windSpeed:widget.state.windSpeeds[2], );
 
 
-
+    // сортировка от меньшего к большему по температруе
     sortDays = [day1, day2, day3];
     sortDays.sort((a, b) => (a as WeatherDay).temp.compareTo((b as WeatherDay).temp) );
-    print("DEBUG $sortDays");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(''),
-          actions: [
-          ],
+        appBar:   AppBar(
         ),
         body: Column(
                 children: [
@@ -68,7 +61,7 @@ class _Weather3DaysPageState extends State<Weather3DaysPage> {
   }
 }
 
-
+//класс для описания каждого дня
 class WeatherDay {
   WeatherDay({required this.temp, required this.humadity, required this.windSpeed});
  final temp;

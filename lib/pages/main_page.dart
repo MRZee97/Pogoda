@@ -7,17 +7,9 @@ import '../widgets/action_button.dart';
 import 'city_weather_page.dart';
 
 
-class MainPage extends StatefulWidget {
-
+class MainPage extends StatelessWidget {
 
   MainPage({Key? key}) : super(key: key);
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-
-class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -30,23 +22,31 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
+class MainPageContent extends StatefulWidget {
+  const MainPageContent({Key? key}) : super(key: key);
 
+  @override
+  State<MainPageContent> createState() => _MainPageContentState();
+}
 
-// вынесеный виджет
-class MainPageContent extends StatelessWidget {
+class _MainPageContentState extends State<MainPageContent> {
+  late final TextEditingController _cityEditingController;
+  @override
+  void initState() {
+    super.initState();
+ _cityEditingController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController cityEditingController = TextEditingController();
-
     return Container(
       height: MediaQuery.of(context).size.height,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              controller: cityEditingController,
-              style: TextStyle(
+              controller: _cityEditingController,
+              style: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 20,
                 color: Colors.white,),
@@ -57,11 +57,11 @@ class MainPageContent extends StatelessWidget {
             Align(alignment: Alignment.center,
               child: ActionButton(
                   onTap: () {
-                    if(cityEditingController.text.length >= 3){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CityWeatherPage(city: cityEditingController.text,)));
+                    if(_cityEditingController.text.length >= 3){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> CityWeatherPage(city: _cityEditingController.text,),),);
                     }
                   },
-                  text: "continuation"
+                  text: "Next"
               ),
             ),
 
@@ -70,3 +70,4 @@ class MainPageContent extends StatelessWidget {
     );
   }
 }
+
